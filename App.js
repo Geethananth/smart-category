@@ -1,12 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import CategoryListing from './src/Screens/Category/list';
+import CategoryDetails from './src/Screens/Category/details';
+import AddCategoryForm from './src/Screens/Category/addForm';
+
+
+const Stack = createStackNavigator();
+
+export default function App(props) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>  
+      
+      <Stack.Navigator  
+      initial={CategoryListing}
+        initialRouteName= "Category listing">
+        <Stack.Screen  name="Category listing" component={CategoryListing} />
+        <Stack.Screen name="Category details" component={CategoryDetails} />
+        <Stack.Screen name="Add category" component={AddCategoryForm} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -16,5 +31,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    display: 'flex',
+    alignSelf: 'center',
+    marginTop: 100
   },
 });
